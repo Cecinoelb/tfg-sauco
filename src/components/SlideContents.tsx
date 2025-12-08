@@ -1,11 +1,10 @@
 import { motion } from 'framer-motion';
 import {
-    TrendingUp, Users, CheckCircle, AlertTriangle,
-    Lightbulb, DollarSign, Target
+    TrendingUp, Users, CheckCircle,
+    Lightbulb, DollarSign, Target, Eye, Shield, Share2, Activity
 } from 'lucide-react';
 import { cn } from '../lib/utils';
 import slide1Bg from '../assets/slide1-bg.png';
-import slide2Img from '../assets/slide2-intro.jpg';
 import slide4Map from '../assets/slide4-map.jpg';
 import slide6Bg from '../assets/slide6-action.png';
 import slide12Img from '../assets/slide12-close.jpg';
@@ -86,52 +85,109 @@ export const TitleSlide = () => (
     </div>
 );
 
-// --- Slide 2: Introducción ---
+// --- Slide 2: Introducción (Estructura Dinámica) ---
 export const IntroSlide = () => (
-    <motion.div variants={container} initial="hidden" animate="show" className="grid grid-cols-1 md:grid-cols-2 gap-0 h-full overflow-hidden rounded-3xl border border-white/10 bg-black/40">
-        {/* Left Content */}
-        <div className="p-12 flex flex-col justify-center space-y-8">
-            <motion.div variants={itemVariants}>
-                <h3 className="text-4xl md:text-5xl font-bold text-sauco-gold mb-6 font-serif">El Corazón del Negocio</h3>
-                <p className="text-lg text-gray-300 leading-relaxed">
-                    Sauco S.A. nace de la fusión estratégica entre la producción de <span className="text-white font-bold">Cervecería Checa</span> y la experiencia gastronómica de <span className="text-white font-bold">La Jirafa</span>.
-                </p>
-            </motion.div>
+    <motion.div variants={container} initial="hidden" animate="show" className="flex flex-col h-full bg-black/40 rounded-3xl overflow-hidden border border-white/10 relative">
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/10 via-transparent to-black pointer-events-none" />
 
-            <motion.div variants={itemVariants} className="space-y-4">
-                {/* Barreras Card - Red */}
-                <div className="p-6 rounded-xl bg-red-900/10 border-l-4 border-red-500/80 backdrop-blur-sm">
-                    <div className="flex items-center gap-2 mb-2">
-                        <AlertTriangle className="text-red-500" size={20} />
-                        <span className="text-red-500 font-bold uppercase tracking-wider text-sm">Barreras</span>
-                    </div>
-                    <p className="text-gray-300 text-sm">Alta competencia, incertidumbre económica y capacidad productiva limitada.</p>
+        {/* Main Content Area */}
+        <div className="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-6 p-8 relative z-10">
+
+            {/* Left Col: Network Diagram (Grupo Meta -> Sauco) */}
+            <div className="lg:col-span-5 flex flex-col justify-center items-center relative">
+                <div className="relative">
+                    {/* Linha de conexión */}
+                    <motion.div
+                        initial={{ height: 0 }} animate={{ height: 100 }} transition={{ duration: 1, delay: 0.5 }}
+                        className="absolute left-1/2 top-1/2 -translate-x-1/2 w-0.5 bg-gradient-to-b from-gray-600 to-sauco-gold"
+                    />
+
+                    {/* Grupo Meta Node */}
+                    <motion.div variants={itemVariants} className="relative z-10 mb-16 text-center">
+                        <div className="w-24 h-24 rounded-full border-2 border-gray-600 flex items-center justify-center bg-gray-900 mx-auto shadow-[0_0_30px_rgba(255,255,255,0.05)]">
+                            <Share2 className="text-gray-400" size={32} />
+                        </div>
+                        <h3 className="mt-4 text-gray-400 font-bold tracking-widest text-sm uppercase">Grupo Meta</h3>
+                        <p className="text-xs text-gray-600">Holding Estratégico</p>
+                    </motion.div>
+
+                    {/* Sauco S.A. Node (Hero) */}
+                    <motion.div
+                        initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.8, type: "spring" }}
+                        className="relative z-20 text-center"
+                    >
+                        <div className="absolute inset-0 bg-sauco-gold/20 blur-xl rounded-full" />
+                        <div className="w-40 h-40 rounded-full border-4 border-sauco-gold flex flex-col items-center justify-center bg-black via-gray-900 to-black mx-auto shadow-[0_0_50px_rgba(212,175,55,0.3)] relative">
+                            <span className="text-3xl font-bold text-white mb-1">SAUCO</span>
+                            <span className="text-xs text-sauco-gold font-bold tracking-wider uppercase">Unidad Estratégica</span>
+                        </div>
+                        <div className="mt-6 flex justify-center gap-2">
+                            <div className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-gray-300">Restaurante La Jirafa</div>
+                            <div className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-gray-300">Cervecería Checa</div>
+                        </div>
+                    </motion.div>
                 </div>
+            </div>
 
-                {/* Opportunity Card - Gold */}
-                <div className="p-6 rounded-xl bg-sauco-gold/5 border-l-4 border-sauco-gold/80 backdrop-blur-sm">
-                    <div className="flex items-center gap-2 mb-2">
-                        <Lightbulb className="text-sauco-gold" size={20} />
-                        <span className="text-sauco-gold font-bold uppercase tracking-wider text-sm">Oportunidad</span>
+            {/* Right Col: Strategic Pillars Cards */}
+            <div className="lg:col-span-7 flex flex-col justify-center space-y-4">
+                <motion.h3 variants={itemVariants} className="text-sauco-gold uppercase tracking-[0.2em] font-bold text-sm mb-2 ml-1">Bases Estratégicas</motion.h3>
+
+                {/* Misión */}
+                <motion.div variants={itemVariants} className="group flex gap-5 p-5 bg-white/5 border-l-2 border-sauco-gold rounded-r-xl hover:bg-white/10 transition-all">
+                    <div className="mt-1"><Target className="text-sauco-gold" size={24} /></div>
+                    <div>
+                        <h4 className="text-white font-bold text-lg mb-1">Misión</h4>
+                        <p className="text-gray-400 text-sm leading-relaxed">
+                            Ser una empresa de máximo crecimiento que genere bienestar en la familia y la comunidad.
+                        </p>
                     </div>
-                    <p className="text-gray-300 text-sm">Transformar el éxito local en un modelo de franquicia gastronómica escalable.</p>
+                </motion.div>
+
+                {/* Visión */}
+                <motion.div variants={itemVariants} className="group flex gap-5 p-5 bg-white/5 border-l-2 border-blue-400 rounded-r-xl hover:bg-white/10 transition-all">
+                    <div className="mt-1"><Eye className="text-blue-400" size={24} /></div>
+                    <div>
+                        <h4 className="text-white font-bold text-lg mb-1">Visión</h4>
+                        <p className="text-gray-400 text-sm leading-relaxed">
+                            Crear y gestionar profesionalmente inversiones del grupo, permitiendo un crecimiento diversificado y sustentable a largo plazo.
+                        </p>
+                    </div>
+                </motion.div>
+
+                {/* Valores */}
+                <motion.div variants={itemVariants} className="group flex gap-5 p-5 bg-white/5 border-l-2 border-purple-400 rounded-r-xl hover:bg-white/10 transition-all">
+                    <div className="mt-1"><Shield className="text-purple-400" size={24} /></div>
+                    <div>
+                        <h4 className="text-white font-bold text-lg mb-1">Valores</h4>
+                        <div className="flex flex-wrap gap-2 mt-2">
+                            {['Positivismo', 'Respeto', 'Confianza', 'Compromiso'].map(tag => (
+                                <span key={tag} className="px-2 py-0.5 rounded bg-purple-500/10 text-purple-300 text-xs font-medium border border-purple-500/20">{tag}</span>
+                            ))}
+                        </div>
+                    </div>
+                </motion.div>
+            </div>
+        </div>
+
+        {/* Footer: Problems */}
+        <div className="bg-black/40 border-t border-white/5 p-4">
+            <motion.div variants={itemVariants} className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+                <span className="text-xs uppercase tracking-widest text-gray-500 font-bold">Problemas Observables</span>
+                <div className="flex gap-4 md:gap-8 overflow-x-auto">
+                    {[
+                        { label: "Capacidad Operativa Limitada", color: "text-orange-400" },
+                        { label: "Identidad y Marketing Insuficiente", color: "text-red-400" },
+                        { label: "Incertidumbre Económica", color: "text-yellow-400" }
+                    ].map((prob, i) => (
+                        <div key={i} className="flex items-center gap-2 whitespace-nowrap">
+                            <Activity size={14} className={prob.color} />
+                            <span className="text-gray-300 text-sm">{prob.label}</span>
+                        </div>
+                    ))}
                 </div>
             </motion.div>
         </div>
-
-        {/* Right Image */}
-        <motion.div variants={itemVariants} className="relative h-full w-full">
-            <div className="absolute inset-0 bg-gradient-to-l from-transparent via-transparent to-black/80 z-10" />
-            <img
-                src={slide2Img}
-                alt="Resto La Jirafa"
-                className="w-full h-full object-cover"
-            />
-            <div className="absolute bottom-6 left-6 z-20 flex items-center gap-2">
-                <div className="w-1 h-8 bg-sauco-gold" />
-                <span className="text-white/90 text-sm font-mono tracking-widest uppercase">Experiencia Gastronómica: "Resto La Jirafa"</span>
-            </div>
-        </motion.div>
     </motion.div>
 );
 
