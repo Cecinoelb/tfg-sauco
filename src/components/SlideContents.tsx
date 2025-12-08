@@ -9,6 +9,7 @@ import slide2Img from '../assets/slide2-intro.jpg';
 import slide4Map from '../assets/slide4-map.jpg';
 import slide6Bg from '../assets/slide6-action.png';
 import slide12Img from '../assets/slide12-close.jpg';
+import logoSiglo21 from '../assets/logo-siglo21.png';
 
 // Common animation variants
 const container = {
@@ -69,9 +70,17 @@ export const TitleSlide = () => (
                 <span className="block text-sauco-gold/90 uppercase text-xs tracking-wider mb-1 font-semibold">Profesor</span>
                 <span className="text-white font-medium">Carlos Vittar</span>
             </div>
-            <div>
-                <span className="block text-sauco-gold/90 uppercase text-xs tracking-wider mb-1 font-semibold">Institución</span>
-                <span className="text-white font-medium">Universidad Siglo 21 (2024)</span>
+            <div className="flex flex-col items-center space-y-3">
+                <span className="block text-sauco-gold/90 uppercase text-xs tracking-wider font-semibold">Institución</span>
+                <motion.img
+                    src={logoSiglo21}
+                    alt="Universidad Siglo 21"
+                    className="h-16 w-auto object-contain filter drop-shadow-lg"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.7, duration: 0.5 }}
+                />
+                {/* <span className="text-white font-medium text-sm">Universidad Siglo 21 (2024)</span> */}
             </div>
         </motion.div>
     </div>
