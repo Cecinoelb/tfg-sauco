@@ -26,7 +26,7 @@ export const SLIDES: SlideData[] = [
     },
     {
         id: 4,
-        title: "Propuesta: Franquicias Regionales",
+        title: "Propuesta: Franquicias",
         content: ProposalSlide,
         speakerNotes: "Explicar el corazón del proyecto: no es solo cerveza, es una experiencia regional."
     },
